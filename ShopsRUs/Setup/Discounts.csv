@@ -1,0 +1,5 @@
+﻿Id,Name,DiscountType,DiscountPercentage,DiscountAmount,DiscountableAmount,UserType
+1,CustomerDiscount,1,5,,,1
+2,AffiliateDiscount,1,10,,,2
+3,EmployeeDiscount,1,30,,,3
+4,5DollarDiscount,2,,5,100,

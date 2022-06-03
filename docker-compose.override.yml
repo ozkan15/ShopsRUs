@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+
+  sqldata:
+    environment:
+      - SA_PASSWORD=Pass@1234
+      - ACCEPT_EULA=Y
+    ports:
+      - "5433:1433"
+    volumes:
+      - shopsrus-sqldata:/var/opt/mssql  
+
+  shopsrus:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+
+  sonarqube:
+    ports:
+      - "9000:9000"
+
+   
+
+
+volumes:
+  shopsrus-sqldata:
+    external: false

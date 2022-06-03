@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:2019-latest 
+
+  shopsrus:
+    image: ${DOCKER_REGISTRY-}shopsrus
+    build:
+      context: .
+      dockerfile: ShopsRUs/Dockerfile
+    depends_on:
+      - sqldata
+  
+  sonarqube:
+    image: sonarqube
+    
+
+
+
+  
+
