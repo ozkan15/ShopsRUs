@@ -35,6 +35,45 @@ namespace ShopsRUs.UnitTests
         }
 
         [TestMethod]
+        public async Task BillDetails_Cant_Be_Null()
+        {
+            var data = new BillInputModel
+            {
+                UserId = 1
+            };
+
+            //Act
+            var discountController = InitializeController();
+            var response = await discountController.Post(data);
+            var badRequest = response.Result as BadRequestObjectResult;
+
+            //assert
+            Assert.IsNotNull(badRequest);
+            Assert.IsTrue(badRequest.Value as string == "billDetails can't be null");
+        }
+
+        [TestMethod]
+        public async Task Product_Not_Found()
+        {
+            var wrongProductId = 23123;
+            var data = new BillInputModel
+            {
+                UserId = 1,
+                BillDetails = new List<BillDetailInputModel>
+                {
+                    new BillDetailInputModel {  ProductId = wrongProductId, Quantity = 1 }
+                }
+            };
+
+            var discountController = InitializeController();
+            var response = await discountController.Post(data);
+            var badRequest = response.Result as BadRequestObjectResult;
+
+            Assert.IsNotNull(badRequest);
+            Assert.IsTrue((badRequest.Value as string)?.Contains($"product with Id {wrongProductId} not found"));
+        }
+
+        [TestMethod]
         public async Task Duplicate_Products_Cant_Be_Added()
         {
             // Arrange

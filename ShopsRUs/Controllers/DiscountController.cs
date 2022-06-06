@@ -25,6 +25,8 @@ namespace ShopsRUs.Controllers
         [HttpPost(Name = "CalculateDiscount")]
         public async Task<ActionResult<BillModel>> Post(BillInputModel bill)
         {
+            if(bill == null || bill.BillDetails == null) return BadRequest("billDetails can't be null");
+
             var user = _shopsRUsContext.Set<ShopUser>().FirstOrDefault(s => s.Id == bill.UserId);
 
             if (user == null) return BadRequest("user not found");
