@@ -1,5 +1,5 @@
 # ShopsRUs
-- Database UML Diagram; [ShopsRUsDiagram.png ](https://github.com/ozkan15/ShopsRUs/blob/master/ShopsRUsDiagram.png)
+- Database UML Diagram; [ShopsRUsDiagram1.png ](https://github.com/ozkan15/ShopsRUs/blob/master/ShopsRUsDiagram1.png)
 
 - to run the app
 - run the following command in the project's root folder or start the docker-compose startup project from visual studio
