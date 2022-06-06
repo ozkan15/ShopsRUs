@@ -1,12 +1,12 @@
 # ShopsRUs
 - Database UML Diagram; ShopsRUsDiagram.png 
 
-- to run the app, 
+- to run the app
 - run the following command in the project's root folder 
 
 docker-compose up --build
 
-- after docker container is up open http://localhost:9000 for sonarqube code analysis 
+- after docker container is up, open http://localhost:9000 for sonarqube code analysis 
 - enter username and password (username:admin password:admin)
 - create a project with name "ShopsRUs"
 - run the following commands after replacing the generated token with the "<<GENERATED_TOKEN>>" keywords 
