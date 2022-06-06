@@ -6,9 +6,8 @@
 
 docker-compose up --build
 
-- for sonarqube code analysis,
-- open http://localhost:9000
-- enter username and password (username:admğin password:admin)
+- after docker container is up open http://localhost:9000 for sonarqube code analysis 
+- enter username and password (username:admin password:admin)
 - create a project with name "ShopsRUs"
 - run the following commands after replacing the generated token with the "<<GENERATED_TOKEN>>" keywords 
   
