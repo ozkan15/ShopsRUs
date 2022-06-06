@@ -71,6 +71,7 @@ namespace ShopsRUs.Services
 
             var invoice = await _shopsRUsContext.Invoices.AddAsync(new Invoice
             {
+                AmoutTotal = outputModel.AmountTotal,
                 AmountNet = outputModel.AmountNet,
                 Date = DateTime.Now,
                 User = user,
