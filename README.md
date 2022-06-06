@@ -1,8 +1,8 @@
 # ShopsRUs
-- Database UML Diagram; ShopsRUsDiagram.png 
+- Database UML Diagram; [ShopsRUsDiagram.png ](https://github.com/ozkan15/ShopsRUs/blob/master/ShopsRUsDiagram.png)
 
 - to run the app
-- run the following command in the project's root folder 
+- run the following command in the project's root folder or start the docker-compose startup project from visual studio
 
 docker-compose up --build
 
@@ -11,6 +11,8 @@ docker-compose up --build
 - create a project with name "ShopsRUs"
 - run the following commands in the ShopsRUs.UnitTest project root folder after replacing the generated token with the "<<GENERATED_TOKEN>>" keywords 
   
+dotnet tool install --global dotnet-sonarscanner
+
 dotnet sonarscanner begin /k:"ShopsRUs" /d:sonar.host.url="http://localhost:9000"  /d:sonar.login="<<GENERATED_TOKEN>>" /d:sonar.cs.vscoveragexml.reportsPaths="coverage.xml" /d:sonar.cs.vstest.reportsPaths="**\TestResults\*.trx"
   
 dotnet build --no-incremental
