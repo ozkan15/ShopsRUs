@@ -4,6 +4,7 @@ using ShopsRUs.DTO;
 using ShopsRUs.Infrastructure;
 using ShopsRUs.Infrastructure.Exceptions;
 using ShopsRUs.Model;
+using ShopsRUs.Services;
 using ShopsRUs.ViewModel;
 
 namespace ShopsRUs.Controllers
@@ -13,24 +14,35 @@ namespace ShopsRUs.Controllers
     public class DiscountController : ControllerBase
     {
         private readonly ShopsRUsContext _shopsRUsContext;
+        private readonly IDiscountService _discountService;
 
-        public DiscountController(ShopsRUsContext shopsRUsContext)
+        public DiscountController(ShopsRUsContext shopsRUsContext, IDiscountService discountService)
         {
             _shopsRUsContext = shopsRUsContext;
+            _discountService = discountService;
         }
 
         [HttpPost(Name = "CalculateDiscount")]
-        public ActionResult<BillModel> Get(BillInputModel bill)
+        public async Task<ActionResult<BillModel>> Post(BillInputModel bill)
         {
             var user = _shopsRUsContext.Set<ShopUser>().FirstOrDefault(s => s.Id == bill.UserId);
 
-            if (user == null) return NotFound("user not found");
+            if (user == null) return BadRequest("user not found");
 
-            if ((bill.BillDetails?.Count ?? 0) == 0) return NotFound("products not found");
+            if ((bill.BillDetails?.Count ?? 0) == 0) return BadRequest("product list cant be empty");
 
             if (bill.BillDetails.Any(s => s.Quantity <= 0)) return BadRequest("product quantities must be bigger than 0");
 
             var productIdList = bill.BillDetails.Select(s => s.ProductId).ToList();
+
+            var productSet = new HashSet<int>();
+            foreach (var productId in productIdList)
+            {
+                if (productSet.Contains(productId)) return BadRequest("duplicate product found");
+
+                productSet.Add(productId);
+            }
+
             var quantities = bill.BillDetails.ToDictionary(s => s.ProductId);
 
             var outputModel = new BillModel
@@ -44,50 +56,29 @@ namespace ShopsRUs.Controllers
                 Discounts = new List<DiscountModel>()
             };
 
-
             var amountTotal = _shopsRUsContext.Products
                 .Where(s => productIdList.Contains(s.Id))
                 .ToList()
                 .Aggregate(0m, (acc, next) => acc + next.Price * quantities[next.Id].Quantity);
             outputModel.AmountTotal = amountTotal;
 
-            var percentageDiscount = _shopsRUsContext.PercentageDiscounts.FirstOrDefault(s => s.UserType == user.UserType);
-            var excludedProductCategories = percentageDiscount.ExcludedProductCategories.Select(epc => epc.ProductCategoryId);
-            var percentageDiscountAmount = 0m;
-
             try
             {
-                outputModel.BillDetails.ForEach(s =>
-                {
-                    var dbProduct = _shopsRUsContext.Products.FirstOrDefault(pr => pr.Id == s.ProductId);
-
-                    if (dbProduct == null) throw new ItemNotFoundException($"product with Id {s.ProductId} not found");
-
-                    if (!excludedProductCategories.Contains(dbProduct.CategoryId))
-                    {
-                        s.UnitPrice = dbProduct.Price;
-                        s.Amount = dbProduct.Price * s.Quantity;
-                        s.ProductName = dbProduct.ItemName;
-                        s.DiscountAmount = (dbProduct.Price * s.Quantity) * (decimal)percentageDiscount.DiscountPercentage / 100;
-                        percentageDiscountAmount += s.DiscountAmount;
-                    }
-                });
+                _discountService.GetPercentageBasedDiscount(user, outputModel);
             }
             catch (ItemNotFoundException ex)
             {
-                return NotFound(ex.Message);
+                return BadRequest(ex.Message);
             }
 
+            _discountService.GetAmountBasedDiscount(outputModel);
 
-            outputModel.Discounts.Add(new DiscountModel { DiscountAmount = percentageDiscountAmount, DiscountName = percentageDiscount.Name });
-
-            var amountBasedDiscount = _shopsRUsContext.AmountDiscounts.First();
-            var amountBasedDiscountAmount = ((int)amountTotal / (int)amountBasedDiscount.DiscountableAmount) * amountBasedDiscount.DiscountAmount;
-
-            outputModel.Discounts.Add(new DiscountModel { DiscountAmount = amountBasedDiscountAmount, DiscountName = amountBasedDiscount.Name });
-
-            outputModel.DiscountTotal = percentageDiscountAmount + amountBasedDiscountAmount;
             outputModel.AmountNet = outputModel.AmountTotal - outputModel.DiscountTotal;
+
+
+            var isSuccessful = await _discountService.SaveUserInvoice(user, outputModel);
+
+            if (!isSuccessful) return StatusCode(StatusCodes.Status500InternalServerError);
 
             return Ok(outputModel);
         }

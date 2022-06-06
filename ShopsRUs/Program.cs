@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ShopsRUs.Infrastructure;
+using ShopsRUs.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddDbContext<ShopsRUsContext>(options =>
     options.UseLazyLoadingProxies();
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), sqlServerOptionsAction: o => o.MigrationsAssembly("ShopsRUs"));
 }, ServiceLifetime.Scoped);
+
+builder.Services.AddTransient<IDiscountService, DiscountService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,0 +1,15 @@
+﻿C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs.UnitTests\DiscountControllerTest.cs
+C:\Users\akifo\.nuget\packages\microsoft.net.test.sdk\16.11.0\build\netcoreapp2.1\Microsoft.NET.Test.Sdk.Program.cs
+C:\Users\akifo\.nuget\packages\microsoft.testplatform.testhost\16.11.0\build\netcoreapp2.1\x64\testhost.exe
+C:\Users\akifo\.nuget\packages\microsoft.testplatform.testhost\16.11.0\build\netcoreapp2.1\x64\testhost.dll
+C:\Users\akifo\.nuget\packages\microsoft.testplatform.testhost\16.11.0\build\netcoreapp2.1\x64\Microsoft.TestPlatform.PlatformAbstractions.dll
+C:\Users\akifo\.nuget\packages\mstest.testadapter\2.2.7\build\_common\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\akifo\.nuget\packages\mstest.testadapter\2.2.7\build\_common\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\akifo\.nuget\packages\mstest.testadapter\2.2.7\build\netcoreapp1.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\akifo\.nuget\packages\mstest.testadapter\2.2.7\build\netcoreapp1.0\Microsoft.TestPlatform.AdapterUtilities.dll
+C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs.UnitTests\Setup\Discounts.csv
+C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs.UnitTests\Setup\ExcludedProductCategoriesForDiscount.csv
+C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs.UnitTests\Setup\ProductCategories.csv
+C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs.UnitTests\Setup\Products.csv
+C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs.UnitTests\Setup\Users.csv
+C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs.UnitTests\sonar-project.properties

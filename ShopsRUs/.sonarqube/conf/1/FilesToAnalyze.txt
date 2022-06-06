@@ -40,10 +40,10 @@ C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\Model\ShopUser.cs
 C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\Program.cs
 C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\Services\DiscountService.cs
 C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\Services\IDiscountService.cs
-C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\obj\Debug\net6.0\ShopsRUs.GlobalUsings.g.cs
-C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
-C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\obj\Debug\net6.0\ShopsRUs.AssemblyInfo.cs
-C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\obj\Debug\net6.0\ShopsRUs.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\obj\Release\net6.0\ShopsRUs.GlobalUsings.g.cs
+C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\obj\Release\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\obj\Release\net6.0\ShopsRUs.AssemblyInfo.cs
+C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\obj\Release\net6.0\ShopsRUs.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\appsettings.Development.json
 C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\appsettings.json
 C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\Dockerfile
@@ -54,3 +54,4 @@ C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\Setup\Products.csv
 C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\Setup\Users.csv
 C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\Properties\launchSettings.json
 C:\Users\akifo\source\repos\ShopsRUs\.dockerignore
+C:\Users\akifo\source\repos\ShopsRUs\ShopsRUs\obj\Release\net6.0\apphost.exe

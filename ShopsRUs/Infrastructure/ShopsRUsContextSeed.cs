@@ -26,6 +26,7 @@ namespace ShopsRUs.Infrastructure
                                  DiscountType = DiscountType.Percentage,
                                  DiscountPercentage = int.Parse(columns[3]),
                                  UserType = (UserType)int.Parse(columns[6]),
+                                 RequiredYearsForUser = int.Parse(columns[7]),
                              };
                          }
                          else

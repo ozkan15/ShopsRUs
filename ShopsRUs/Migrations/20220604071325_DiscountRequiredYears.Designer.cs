@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopsRUs.Infrastructure;
 
@@ -11,9 +12,10 @@ using ShopsRUs.Infrastructure;
 namespace ShopsRUs.Migrations
 {
     [DbContext(typeof(ShopsRUsContext))]
-    partial class ShopsRUsContextModelSnapshot : ModelSnapshot
+    [Migration("20220604071325_DiscountRequiredYears")]
+    partial class DiscountRequiredYears
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -449,24 +451,6 @@ namespace ShopsRUs.Migrations
                             DiscountPercentage = 5.0,
                             RequiredYearsForUser = 2,
                             UserType = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DiscountType = 1,
-                            Name = "AffiliateDiscount",
-                            DiscountPercentage = 10.0,
-                            RequiredYearsForUser = 0,
-                            UserType = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DiscountType = 1,
-                            Name = "EmployeeDiscount",
-                            DiscountPercentage = 30.0,
-                            RequiredYearsForUser = 0,
-                            UserType = 3
                         });
                 });
 

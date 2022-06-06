@@ -26,6 +26,7 @@ namespace ShopsRUs.Infrastructure.EntityConfigurations
             builder.HasData(ShopsRUsContextSeed.GetDiscounts().Where(s => s.DiscountType == DiscountType.Percentage));
             builder.Property(x => x.DiscountPercentage);
             builder.Property(x => x.UserType);
+            builder.Property(x => x.RequiredYearsForUser);
         }
     }
 
