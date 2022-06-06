@@ -8,10 +8,14 @@ docker-compose up --build
 - open http://localhost:9000
 - enter username and password (username:admğin password:admin)
 - create a project with name "ShopsRUs"
-- run the following command after replacing the generated token with the "<TOKEN>" keywords 
+- run the following command after replacing the generated token with the "<<GENERATED_TOKEN>>" keywords 
   
-dotnet sonarscanner begin /k:"ShopsRUs" /d:sonar.host.url="http://localhost:9000"  /d:sonar.login="<TOKEN>" sonar.cs.vscoveragexml.reportsPaths="coverage.xml" /d:sonar.cs.vstest.reportsPaths="**\TestResults\*.trx"
+dotnet sonarscanner begin /k:"ShopsRUs" /d:sonar.host.url="http://localhost:9000"  /d:sonar.login="<<GENERATED_TOKEN>>" sonar.cs.vscoveragexml.reportsPaths="coverage.xml" /d:sonar.cs.vstest.reportsPaths="**\TestResults\*.trx"
+  
 dotnet build --no-incremental
+  
 dotnet-coverage collect 'dotnet test' -f xml  -o 'coverage.xml'
+  
 vstest.console.exe bin\Debug\net6.0\ShopsRUs.UnitTests.dll /ResultsDirectory:"TestResults" /Logger:trx
-dotnet sonarscanner end /d:sonar.login="<TOKEN>"
+  
+dotnet sonarscanner end /d:sonar.login="<<GENERATED_TOKEN>>"
