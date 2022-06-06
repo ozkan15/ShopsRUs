@@ -1,6 +1,7 @@
 # ShopsRUs
 - to run the app, 
 - run the following command in the project's root folder 
+
 docker-compose up --build
 
 - for sonarqube code analysis,
