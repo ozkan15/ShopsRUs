@@ -19,13 +19,16 @@ namespace ShopsRUs.Services
             var amountBasedDiscount = _shopsRUsContext.AmountDiscounts.First();
             var amountBasedDiscountAmount = ((int)outputModel.AmountTotal / (int)amountBasedDiscount.DiscountableAmount) * amountBasedDiscount.DiscountAmount;
 
-            outputModel.Discounts.Add(new DiscountModel
+            if (amountBasedDiscountAmount > 0)
             {
-                DiscountId = amountBasedDiscount.Id,
-                DiscountAmount = amountBasedDiscountAmount,
-                DiscountName = amountBasedDiscount.Name
-            });
-            outputModel.DiscountTotal += amountBasedDiscountAmount;
+                outputModel.Discounts.Add(new DiscountModel
+                {
+                    DiscountId = amountBasedDiscount.Id,
+                    DiscountAmount = amountBasedDiscountAmount,
+                    DiscountName = amountBasedDiscount.Name
+                });
+                outputModel.DiscountTotal += amountBasedDiscountAmount;
+            }
         }
 
         public void GetPercentageBasedDiscount(ShopUser user, BillModel outputModel)
@@ -35,6 +38,7 @@ namespace ShopsRUs.Services
 
             var excludedProductCategories = percentageDiscount.ExcludedProductCategories.Select(epc => epc.ProductCategoryId);
             var percentageDiscountAmount = 0m;
+            var discountApplied = false;
 
             outputModel.BillDetails.ForEach(s =>
             {
@@ -42,21 +46,19 @@ namespace ShopsRUs.Services
 
                 if (dbProduct == null) throw new ItemNotFoundException($"product with Id {s.ProductId} not found");
 
-                if (!excludedProductCategories.Contains(dbProduct.CategoryId))
-                {
-                    s.UnitPrice = dbProduct.Price;
-                    s.Amount = dbProduct.Price * s.Quantity;
-                    s.ProductName = dbProduct.ItemName;
+                s.UnitPrice = dbProduct.Price;
+                s.Amount = dbProduct.Price * s.Quantity;
+                s.ProductName = dbProduct.ItemName;
 
-                    if (discountAvailibilityStartDate > user.RegistrationDate)
-                    {
-                        s.DiscountAmount = (dbProduct.Price * s.Quantity) * (decimal)percentageDiscount.DiscountPercentage / 100;
-                        percentageDiscountAmount += s.DiscountAmount;
-                    }
+                if (!excludedProductCategories.Contains(dbProduct.CategoryId) && discountAvailibilityStartDate > user.RegistrationDate)
+                {
+                    s.DiscountAmount = (dbProduct.Price * s.Quantity) * (decimal)percentageDiscount.DiscountPercentage / 100;
+                    percentageDiscountAmount += s.DiscountAmount;
+                    discountApplied = true;
                 }
             });
 
-            if (discountAvailibilityStartDate > user.RegistrationDate)
+            if (discountApplied)
             {
                 outputModel.Discounts.Add(new DiscountModel { DiscountId = percentageDiscount.Id, DiscountAmount = percentageDiscountAmount, DiscountName = percentageDiscount.Name });
                 outputModel.DiscountTotal += percentageDiscountAmount;

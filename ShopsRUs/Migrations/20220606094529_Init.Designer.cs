@@ -12,8 +12,8 @@ using ShopsRUs.Infrastructure;
 namespace ShopsRUs.Migrations
 {
     [DbContext(typeof(ShopsRUsContext))]
-    [Migration("20220604071905_DiscountYearsEdit")]
-    partial class DiscountYearsEdit
+    [Migration("20220606094529_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

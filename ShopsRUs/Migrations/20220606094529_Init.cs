@@ -20,7 +20,8 @@ namespace ShopsRUs.Migrations
                     DiscountAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     DiscountableAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     DiscountPercentage = table.Column<double>(type: "float", nullable: true),
-                    UserType = table.Column<int>(type: "int", nullable: true)
+                    UserType = table.Column<int>(type: "int", nullable: true),
+                    RequiredYearsForUser = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -187,12 +188,12 @@ namespace ShopsRUs.Migrations
 
             migrationBuilder.InsertData(
                 table: "Discounts",
-                columns: new[] { "Id", "DiscountPercentage", "DiscountType", "Name", "UserType" },
+                columns: new[] { "Id", "DiscountPercentage", "DiscountType", "Name", "RequiredYearsForUser", "UserType" },
                 values: new object[,]
                 {
-                    { 1, 0.0, 1, "CustomerDiscount", 1 },
-                    { 2, 0.0, 1, "AffiliateDiscount", 2 },
-                    { 3, 0.0, 1, "EmployeeDiscount", 3 }
+                    { 1, 5.0, 1, "CustomerDiscount", 2, 1 },
+                    { 2, 10.0, 1, "AffiliateDiscount", 0, 2 },
+                    { 3, 30.0, 1, "EmployeeDiscount", 0, 3 }
                 });
 
             migrationBuilder.InsertData(
